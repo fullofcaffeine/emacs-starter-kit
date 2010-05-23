@@ -47,12 +47,14 @@
 (require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
 (require 'starter-kit-ruby)
-;; (require 'starter-kit-js)
+;;(require 'starter-kit-js)
 
 (regen-autoloads)
 (load custom-file 'noerror)
 
 ;; You can keep system- or user-specific customizations here:
+
+(system-name)
 
 (setq system-specific-config (concat dotfiles-dir system-name ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el"))
