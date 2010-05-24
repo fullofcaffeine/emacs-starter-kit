@@ -92,7 +92,7 @@
 (require 'rspec-mode)
 
 (require 'topfunky/applescript)
-(require 'topfunky/org)
+;;(require 'topfunky/org) overwritten by my own org configuration (fullofcaffeine/org.el)
 (require 'topfunky/textile)
 (require 'topfunky/markdown)
 (require 'topfunky/haml)
@@ -113,3 +113,5 @@
 ;; Activate theme
 (load (concat dotfiles-dir "topfunky/theme.el"))
 (color-theme-topfunky)
+
+(provide 'topfunky)

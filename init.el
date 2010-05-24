@@ -52,6 +52,8 @@
 (regen-autoloads)
 (load custom-file 'noerror)
 
+(user-login-name)
+
 ;; You can keep system- or user-specific customizations here:
 
 (system-name)
