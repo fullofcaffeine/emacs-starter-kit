@@ -10,3 +10,7 @@ auto-save-alist/*
 /url/cookies
 
 celoserpa-macbook.local.el
+
+\#*#
+*~
+
