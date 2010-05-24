@@ -4,6 +4,8 @@ backups/*
 places
 .DS_Store
 
+auto-save-alist/*
+
 /#topfunky.el#
 /url/cookies
 
