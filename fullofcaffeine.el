@@ -1,4 +1,5 @@
 (require 'topfunky)
 
-;;org-mode
+(require 'fullofcaffeine/meta)
 (require 'fullofcaffeine/org)
+(require 'fullofcaffeine/gpicker)

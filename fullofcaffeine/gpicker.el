@@ -25,3 +25,5 @@
 
 ;;</end>
 
+(provide 'fullofcaffeine/gpicker)
+

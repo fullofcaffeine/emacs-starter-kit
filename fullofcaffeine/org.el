@@ -150,33 +150,25 @@
 ;;lots of code that don't relate with what I want to do, but
 ;;surprisignly, it works very well for what I want...
 
-(defjump
-   'find-wiki
-   '((t                                        . "~/org/wiki/"))
-   
-   "/"
-   "Go to the most logical model given the current location."
-   '(lambda (path)
-      (message (shell-command-to-string
- 	       (format "ruby %sscript/generate model %s"
- 		       (rinari-root)
- 		       (and (string-match ".*/\\(.+?\\)\.rb" path)
- 			    (match-string 1 path))))))
-   'ruby-add-log-current-method)
 
-(defjump
-   'find-gtd-file
-   '((t                                        . "~/org/gtd/"))
-   
-   "/"
-   "Go to the most logical model given the current location."
-   '(lambda (path)
-      (message (shell-command-to-string
- 	       (format "ruby %sscript/generate model %s"
- 		       (rinari-root)
- 		       (and (string-match ".*/\\(.+?\\)\.rb" path)
- 			    (match-string 1 path))))))
-   'ruby-add-log-current-method)
+(defun find-wiki ()
+  "Find a file in the wiki dir"
+  (interactive)
+  (let ((root ("~/org/wiki")))
+    (when (null root)
+      (error
+       (concat
+        "Can't find a suitable project root ("
+        (string-join " " *textmate-project-roots* )
+        ")")))
+    (find-file
+     (concat
+      (expand-file-name root) "/"
+      (textmate-completing-read
+       "Find file: "
+       (textmate-cached-project-files root))))))
+
+
 
 
 

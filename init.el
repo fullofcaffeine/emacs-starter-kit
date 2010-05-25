@@ -56,14 +56,16 @@
 
 ;; You can keep system- or user-specific customizations here:
 
-(system-name)
 
 (setq system-specific-config (concat dotfiles-dir system-name ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el"))
 
-(if (file-exists-p system-specific-config) (load system-specific-config))
+;;reversed in order to keep private data on system-specific-config
+;;so, user-specific data will load my specific mods and then private
+;;data is loaded from a system file (macbook.local.el, not under
+;;version control)
 (if (file-exists-p user-specific-config) (load user-specific-config))
-
+(if (file-exists-p system-specific-config) (load system-specific-config))
 ;; Benchmarking
 (message "My .emacs loaded in %ds"
          (destructuring-bind (hi lo ms) (current-time)
