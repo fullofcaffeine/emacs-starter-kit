@@ -151,26 +151,29 @@
 ;;surprisignly, it works very well for what I want...
 
 
-(defun find-wiki ()
-  "Find a file in the wiki dir"
+
+
+;;extension to PeepOpen to allow specifyin a project root
+
+(defun peepopen-goto-file-gui-manual (arg)
+  "Uses external GUI app to quickly jump to a file in the project."
   (interactive)
-  (let ((root ("~/org/wiki")))
+  (defun string-join (separator strings)
+    "Join all STRINGS using SEPARATOR."
+    (mapconcat 'identity strings separator))
+  (let ((root arg))
     (when (null root)
       (error
        (concat
         "Can't find a suitable project root ("
         (string-join " " *textmate-project-roots* )
         ")")))
-    (find-file
-     (concat
-      (expand-file-name root) "/"
-      (textmate-completing-read
-       "Find file: "
-       (textmate-cached-project-files root))))))
+    (shell-command-to-string
+     (format "open -a PeepOpen '%s'"
+             (expand-file-name root)))))
 
 
-
-
+(defun find-wiki () "Find files in the wiki dir" (interactive) (peepopen-goto-file-gui-manual "~/org/wiki"))
 
 (global-set-key (kbd "s-w") 'find-wiki)
 (global-set-key (kbd "s-g") 'find-gtd-file)
