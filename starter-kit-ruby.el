@@ -88,5 +88,27 @@ exec-to-string command, but it works and seems fast"
 ;; TODO: set up ri
 ;; TODO: electric
 
+;;folding
+
+;;; You may also want to bind hide-body, hide-subtree, show-substree,
+;;; show-all, show-children, ... to some keys easy folding and unfolding
+(add-hook 'ruby-mode-hook
+              '(lambda ()
+                 (outline-minor-mode)
+                 (setq outline-regexp " *\\(def \\|class\\|module\\|it\\|describe\\|context\\)")) t)
+ 
+ ; Outline-minor-mode key map
+(global-set-key [M-left] 'hide-body)
+(global-set-key [M-right] 'show-all)
+(global-set-key [M-up] 'hide-entry)
+(global-set-key [M-down] 'show-entry)
+
+
+;;automatically idents every time <enter> is pressed.
+(add-hook 'ruby-mode-hook '(lambda ()
+                             (local-set-key (kbd "RET") 'newline-and-indent)))
+
+
+
 (provide 'starter-kit-ruby)
 ;; starter-kit-ruby.el ends here
