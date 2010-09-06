@@ -17,23 +17,23 @@
 ;; ;; Clojure
 ;; ;;(eval-after-load 'clojure-mode '(clojure-slime-config))
 
-;; (require 'topfunky/plain-text)
+ (require 'topfunky/plain-text)
 
-;; ;; Snippets
-;; (add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet.el"))
-;; (require 'yasnippet)
-;; (yas/initialize)
-;; (yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
+ ;; Snippets
+ (add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet.el"))
+ (require 'yasnippet)
+ (yas/initialize)
+ (yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
 
 ;; (require 'unbound)
 
-;; (add-to-list 'load-path (concat dotfiles-dir "/vendor/textmate.el"))
-;; (require 'textmate)
-;; (require 'peepopen)
-;; (require 'topfunky/textmate-ext)
-;; (textmate-mode)
+ (add-to-list 'load-path (concat dotfiles-dir "/vendor/textmate.el"))
+ (require 'textmate)
+ (require 'peepopen)
+ (require 'topfunky/textmate-ext)
+ (textmate-mode)
 
-;; (require 'whitespace)
+ (require 'whitespace)
 
 ;; (require 'topfunky/python)
 
