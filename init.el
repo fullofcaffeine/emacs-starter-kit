@@ -36,7 +36,7 @@
 
 (require 'package)
 (package-initialize)
-;;(require 'starter-kit-elpa)
+(require 'starter-kit-elpa)
 
 ;; Load up starter kit customizations:
 
@@ -47,47 +47,45 @@
 (require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
 (require 'starter-kit-ruby)
-;;(require 'starter-kit-js)
+(require 'starter-kit-js)
 
 (regen-autoloads)
 (load custom-file 'noerror)
 
-(user-login-name)
-
 ;; You can keep system- or user-specific customizations here:
 
 
-(setq system-specific-config (concat dotfiles-dir system-name ".el")
-      user-specific-config (concat dotfiles-dir user-login-name ".el"))
+ (setq system-specific-config (concat dotfiles-dir system-name ".el")
+       user-specific-config (concat dotfiles-dir user-login-name ".el"))
 
-;;reversed in order to keep private data on system-specific-config
-;;so, user-specific data will load my specific mods and then private
-;;data is loaded from a system file (macbook.local.el, not under
-;;version control)
-(if (file-exists-p user-specific-config) (load user-specific-config))
-(if (file-exists-p system-specific-config) (load system-specific-config))
-;; Benchmarking
-(message "My .emacs loaded in %ds"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*) (second
-                                                       *emacs-load-start*)))))
+;; ;;reversed in order to keep private data on system-specific-config
+;; ;;so, user-specific data will load my specific mods and then private
+;; ;;data is loaded from a system file (macbook.local.el, not under
+;; ;;version control)
+ (if (file-exists-p user-specific-config) (load user-specific-config))
+ (if (file-exists-p system-specific-config) (load system-specific-config))
+;; ;; Benchmarking
+; (message "My .emacs loaded in %ds"
+;          (destructuring-bind (hi lo ms) (current-time)
+;            (- (+ hi lo) (+ (first *emacs-load-start*) (second
+;                                                        *emacs-load-start*)))))
 
 
-(put 'narrow-to-region 'disabled nil)
-;;This is the place for customizations specific to my macbook (local environment)
+;; (put 'narrow-to-region 'disabled nil)
+;; ;;This is the place for customizations specific to my macbook (local environment)
 
-;;disable the visible bell, which doesn't work well on emacs 23 ns for OSX
-(setq visible-bell nil)
+;; ;;disable the visible bell, which doesn't work well on emacs 23 ns for OSX
+ (setq visible-bell nil)
 
-;;I like using C-k for killing lines and regions
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
+;; ;;I like using C-k for killing lines and regions
+ (global-set-key "\C-x\C-k" 'kill-region)
+ (global-set-key "\C-c\C-k" 'kill-region)
 
-(global-set-key "\C-w" 'backward-kill-word)
+ (global-set-key "\C-w" 'backward-kill-word)
 
-(gpicker-visit-project "~/Projetos/onelogin")
+;; (gpicker-visit-project "~/Projetos/onelogin")
 
-(put 'downcase-region 'disabled nil)
+ (put 'downcase-region 'disabled nil)
 
 
 (provide 'init)

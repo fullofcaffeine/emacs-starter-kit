@@ -10,7 +10,13 @@
 
 (dolist (r `((?i (file . ,(concat dotfiles-dir "init.el")))
              (?b (file . ,(concat dotfiles-dir "starter-kit-bindings.el")))
-             (?r (file . ,(concat dotfiles-dir "starter-kit-registers.el")))))
+             (?r (file . ,(concat dotfiles-dir "starter-kit-registers.el")))
+             (?l (file . "~/Projetos/yourtruelife/book_notes.org"))
+             (?c (file . "~/org/gtd/calendar.org"))
+             (?j (file . "~/org/data/blog/journal.org"))
+             (?o (file . "~/.emacs.d/fullofcaffeine/org.el"))
+
+             ))
   (set-register (car r) (cadr r)))
 
 (provide 'starter-kit-registers)

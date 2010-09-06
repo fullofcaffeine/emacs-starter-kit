@@ -25,5 +25,6 @@
 
 (require 'org-mac-protocol)
 
+(color-theme-railscasts)
 
 (provide 'fullofcaffeine/meta)
