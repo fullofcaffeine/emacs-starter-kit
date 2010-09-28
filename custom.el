@@ -6,9 +6,8 @@
  '(cc-other-file-alist (quote (("\\.cc\\'" (".hh" ".h")) ("\\.hh\\'" (".cc" ".C")) ("\\.m\\'" (".h")) ("\\.c\\'" (".h")) ("\\.h\\'" (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".m")) ("\\.C\\'" (".H" ".hh" ".h")) ("\\.H\\'" (".C" ".CC")) ("\\.CC\\'" (".HH" ".H" ".hh" ".h")) ("\\.HH\\'" (".CC")) ("\\.c\\+\\+\\'" (".h++" ".hh" ".h")) ("\\.h\\+\\+\\'" (".c++")) ("\\.cpp\\'" (".hpp" ".hh" ".h")) ("\\.hpp\\'" (".cpp")) ("\\.cxx\\'" (".hxx" ".hh" ".h")) ("\\.hxx\\'" (".cxx")))))
  '(javascript-indent-level 2 t)
  '(org-agenda-files (quote ("~/org/gtd/gtd.org" "~/org/gtd/calendar.org" "~/org/gtd/reference.org")))
- '(org-modules (quote (org-habit org-mac-protocol)))
- '(org-tags-exclude-from-inheritance (quote ("PROJECT" "FEATURE" "ONELOGIN")))
- '(org-wikinodes-create-targets (quote query))
+ '(org-modules (quote (org-habit org-wikinodes org-mac-protocol)))
+ '(org-tags-exclude-from-inheritance (quote ("PROJECT" "FEATURE")))
  '(org-wikinodes-scope (quote directory))
  '(ruby-deep-indent-paren nil))
 (custom-set-faces

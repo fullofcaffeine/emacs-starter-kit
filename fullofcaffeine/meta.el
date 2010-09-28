@@ -24,7 +24,10 @@
 
 
 (require 'org-mac-protocol)
+(require 'iimage)
 
 (color-theme-railscasts)
+
+(set-cursor-color "red")
 
 (provide 'fullofcaffeine/meta)

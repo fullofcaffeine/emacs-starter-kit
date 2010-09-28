@@ -15,6 +15,7 @@
     (global-set-key "\C-cb" 'org-iswitchb)
     (global-font-lock-mode 1)                     ; for all buffers
     (add-hook 'org-mode-hook 'turn-on-font-lock)  ; Org buffers only
+    (add-hook 'org-mode-hook 'iimage-mode)
     (transient-mark-mode 1)
     )
   )
@@ -52,8 +53,11 @@
 
 
 (setq org-remember-templates
-    '(
+      '(
+        
+     ("OneLogin-Bug" ?b "*** TODO %^{Description} :ONELOGIN:BUG:\nAdded: %U" "~/org/gtd/gtd.org")
      ("NextAction" ?t "*** TODO %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/gtd/gtd.org")
+     ("TaskForToday" ?d "*** TODO %^{Brief Description} %^g\nSCHEDULED: %t" "~/org/gtd/gtd.org")
      ("Inbox" ?i "\n* %^{topic} %T \n%i%?\n%a" "~/org/gtd/in.org")
      ("Someday" ?s "\n* %^{topic} %T \n%i%?\n" "~/org/gtd/someday_maybe.org")
      ("Reference" ?r "\n* %^{topic} %^g %T \n%i%?\n" "~/org/gtd/reference.org" "Reference")
@@ -112,13 +116,29 @@
           (tags-todo "ONELOGIN")
           )
          )
+        
+        ("N" "Personal Next-Actions"
+         ((agenda)
+          (tags-todo "PERSONAL|FREETIME")))
 
         ("L" "OneLogin Projects"
          ((agenda)
-          (tags-todo "PROJECT&ONELOGIN")
+          (tags "PROJECT+ONELOGIN")
           )
          )
 
+        ("B" "OneLogin Outstanding Bugs"
+         ((agenda)
+          (tags "ONELOGIN+BUG")
+          )
+         )
+
+        ("P" "Personal Projects"
+         ((agenda)
+          (tags "PROJECT-ONELOGIN")
+          ))
+        
+        
         ("H" "Office and Home Lists"
           ((agenda)
            (tags-todo "OFFICE")
@@ -143,7 +163,6 @@
 ;;MOBILEORG CONF
 
 (setq org-mobile-directory "/Volumes/orgmms")
-
 
 (defun dpush nil nil (interactive) (org-mobile-push) (org-mobile-push))
 (global-set-key (kbd "<f9>") 'org-mobile-push)
