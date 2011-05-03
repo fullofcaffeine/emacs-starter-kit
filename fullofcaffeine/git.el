@@ -8,4 +8,5 @@
 (global-set-key (kbd "C-x C-g") '(lambda () (interactive) (git-status "~/workspace/code/onelogin")))
 
 
+
 (provide 'fullofcaffeine/git)

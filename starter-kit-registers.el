@@ -16,6 +16,12 @@
              (?c (file . "~/org/gtd/calendar.org"))
              (?j (file . "~/org/data/blog/journal.org"))
              (?o (file . "~/.emacs.d/fullofcaffeine/org.el"))
+             (?s (file . "~/org/gtd/someday_maybe.org"))
+             (?z (file . "~/workspace/code/zenorg_docs/zenorg.org"))
+             (?y (file . "~/workspace/code/booksfy_docs/docs/Projeto.org"))
+             (?m (file . "~/org/data/dynamic_reference/MediCenter.org"))
+
+             
 
              ))
   (set-register (car r) (cadr r)))

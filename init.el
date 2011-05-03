@@ -55,6 +55,7 @@
 (regen-autoloads)
 
 
+
 ;; You can keep system- or user-specific customizations here:
 
 
@@ -74,7 +75,6 @@
 ;                                                        *emacs-load-start*)))))
 
 
-;; (put 'narrow-to-region 'disabled nil)
 ;; ;;This is the place for customizations specific to my macbook (local environment)
 
 ;; ;;disable the visible bell, which doesn't work well on emacs 23 ns for OSX
@@ -93,3 +93,6 @@
 
 (provide 'init)
 ;;; init.el ends here
+
+
+(put 'scroll-left 'disabled nil)

@@ -21,12 +21,19 @@
   )
 
 
+
 ;;this should be moved to a custom-conf file, as this file is only a
 ;;def/conf:
 (org-remember-insinuate)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/gtd/GTDinbox.org"))
 (define-key global-map "\C-cr" 'org-remember)
+
+
+;;import flagged mai
+;(defun my-mail-import ()
+;  (let ((org-mac-mail-account "OneLog.in"))
+;    (org-mac-message-insert-flagged "in.org" "Flagged mail")))
 
 
 
@@ -63,8 +70,8 @@
      ("Reference" ?r "\n* %^{topic} %^g %T \n%i%?\n" "~/org/gtd/reference.org" "Reference")
      ("Project" ?p "*** TODO %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/gtd/gtd.org" "*Projects*")
      ("AppleScript remember" ?y "* %:shortdesc\n  %:initial\n   Source: %u, %c\n\n  %?" "~/org/gtd/in.org" "Remember")
- ("AppleScript note" ?z "* %?\n\n  Date: %u\n" "~/org/gtd/in.org" "Notes")
-
+     ("AppleScript note" ?z "* %?\n\n  Date: %u\n" "~/org/gtd/in.org" "Notes")
+     ("ThinkingOuttaBoxCollector" ?o "** %^{Description} :THINKINGOUTTABOX:NOTE:\nAdded: %U" "~/workspace/code/thinkingouttabox/notes.org", "Notes")
      )
     )
 
@@ -96,9 +103,11 @@
 ;;a little elisp func to rgrep through all my org directory
 (defun org-rgrep (REGEXP1) "Searches through all my org/PIM files" (interactive "sSearch PIM for: ") (rgrep REGEXP1 "*.org" "~/org" ))
 ;;bind the previous function to windows_key + o
-(global-set-key [?\s-o] 'org-rgrep)
+;;(global-set-key [?\s-o] 'org-rgrep)
  
+(defun tags-rgrep (REGEXP1) "Searches the dynamic data for documents tags" (interactive "sSearch TAGS:") (rgrep (concat "^* tags.*" REGEXP1 ".*$") "*.org" "~/org/data/dynamic_reference"))
 
+(global-set-key (kbd "C-t") 'tags-rgrep)
 
 
 ;; Insert immediate timestamp
@@ -123,13 +132,13 @@
 
         ("L" "OneLogin Projects"
          ((agenda)
-          (tags "PROJECT+ONELOGIN")
+          (tags "PROJECT+ONELOGIN|FEATURE")
           )
          )
 
         ("B" "OneLogin Outstanding Bugs"
          ((agenda)
-          (tags "ONELOGIN+BUG")
+          (tags-todo "ONELOGIN+BUG")
           )
          )
 
@@ -137,15 +146,21 @@
          ((agenda)
           (tags "PROJECT-ONELOGIN")
           ))
+
+        ("w" "Pending Tasks (WAITING-FOR)"
+         ((agenda)
+          (todo "WAITING-FOR"))
+         )
+
+   ("c" "Checklists"
+         ((agenda)
+          (tags "CHECKLIST"))
+         )
         
-        
-        ("H" "Office and Home Lists"
-          ((agenda)
-           (tags-todo "OFFICE")
-           (tags-todo "HOME")
-           (tags-todo "COMPUTER")
-           (tags-todo "DVD")
-           (tags-todo "READING")))
+        ("r" "Books I am reading"
+         ((agenda)
+          (todo "READING"))
+         )
          
          ("D" "Daily Action List"
           (
@@ -154,22 +169,31 @@
                         (quote ((agenda time-up priority-down tag-up) )))
                        (org-deadline-warning-days 0)
                        ))))
-         
+
+        ; ("F" "Import links to flagged mail" agenda ""
+        ;                ((org-agenda-mode-hook
+        ;                  (my-mail-import))))
+
          )
-         
-      
       )
 
 ;;MOBILEORG CONF
 
-(setq org-mobile-directory "/Volumes/orgmms")
+;;(setq org-mobile-directory "/Volumes/orgmms")
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+
+(setq org-mobile-files-exclude-regexp "reference.org")
+
+
+
 
 (defun dpush nil nil (interactive) (org-mobile-push) (org-mobile-push))
 (global-set-key (kbd "<f9>") 'org-mobile-push)
 
-
-
-
+(add-to-list 'org-agenda-custom-commands
+            '("x" "PROJECT+N/A" tags-tree "PROJECT|TODO=\"TODO\""
+              ((org-show-siblings nil)
+               (org-show-entry-below nil))))
 
 
 
@@ -203,7 +227,10 @@
 
 
 (defun find-wiki () "Find files in the wiki dir" (interactive) (peepopen-goto-file-gui-manual "~/org/data"))
+(defun find-onelogin() "Find files in onelogin" (interactive) (peepopen-goto-file-gui-manual "~/workspace/code/onelogin"))
 
+
+(global-set-key (kbd "s-o") 'find-onelogin)
 (global-set-key (kbd "s-w") 'find-wiki)
 (global-set-key (kbd "s-g") 'find-gtd-file)
 
@@ -218,10 +245,6 @@
 
 ;;(setq org-mac-mail-account "OneLog.in")
 
-;;import flagged mai
-(defun my-mail-import ()
-  (let ((org-mac-mail-account "OneLog.in"))
-    (org-mac-message-insert-flagged "GTDInbox.org" "Flagged mail")))
 
 ;; (setq org-agenda-custom-commands
 ;;       '(("F" "Import links to flagged mail" agenda ""
@@ -408,7 +431,41 @@
 
 (setq font-lock-verbose nil)
 
+(setq org-return-follows-link t)
+(setq org-open-non-existing-files t)
 
+;;Create a new "wiki page"
+(defun create-wiki-page (filename) "Creates a new dynamic ref. data page"
+  (interactive "sEnter filename:")
+  (with-temp-buffer
+    (when (file-writable-p filename)
+      (write-region (point-min) (point-max) (concat "~/org/data/dynamic_reference/" filename ".org"))))
+  )
+
+ (defun write-string-to-file (string file)
+   (interactive "sEnter the string: \nFFile to save to: ")
+   (with-temp-buffer
+     (insert string)
+     (when (file-writable-p file)
+       (write-region (point-min)
+                     (point-max)
+                     file))))
+
+;;extension: makes the index.org read-only when visiting
+
+(global-set-key (kbd "<f3>")  (lambda()  (interactive) (find-file "~/org/index.org")))
+
+(defun set-index-read-only () ""
+  (if (equal (buffer-name) "index.org")
+      (toggle-read-only)
+      
+    )
+  )
+
+
+
+
+(add-hook 'find-file-hook 'set-index-read-only)
 
 
 

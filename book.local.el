@@ -1,5 +1,5 @@
 ;; Normal is 36pt. Screencastable is 26pt.
-(set-face-font 'default "-apple-inconsolata-medium-r-normal--34-0-72-72-m-0-iso10646-1")
+(set-face-font 'default "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1")
 
 ;;(set-face-font 'default "-apple-helvetica-medium-r-normal--32-0-72-72-m-0-iso10646-1")
 ;;(color-theme-topfunky)
